@@ -11,10 +11,11 @@ import reloadpyxel
 
 class App:
 
+    @staticmethod
     def init_pyxel():
         pyxel.init(160, 120, title="Hello Pyxel")
 
-    def __init__(self, repyxel):
+    def __init__(self, repyxel: reloadpyxel.ReloadPyxel):
         repyxel.images[0].load(0, 0, "assets/pyxel_logo_38x16.png")
         repyxel.run(self)
 
