@@ -26,6 +26,7 @@ import reloadpyxel
 
 class App:
 
+    @staticmethod
     def init_pyxel():
         pyxel.init(160, 120, title="My Pyxel Game!")
 
@@ -78,4 +79,67 @@ The repository includes multiple examples in the `examples/` folder, split into 
 These include examples from the original pyxel that were adapted to include the hot-reload capability. As you can see in the code, not much needed to be modified.
 
 A simple example that is a good starting point is [`examples/code_and_resources/pyxel_originals/01_hello_pyxel/`](examples/code_and_resources/pyxel_originals/01_hello_pyxel/)
+
+## API
+
+### main.py
+
+The main file you need to include will do three things:
+1. Create a reloadpyxel object
+2. Call your `init_pyxel` function
+3. Create your `App`, passing it the reloadpyxel object
+
+### reloadpyxel
+
+- `copy_all_attributes(source,destination)`
+  Copies all the attributes from the source object to the destination object.
+  for example if `source.x=2` before the call, then `destination.x=2` after the call.
+  
+- `load(name_of_resource_file, [excl_images], [excl_tilemaps], [excl_sounds], [excl_musics])`
+  Load the resource file (.pyxres). If an option is `True`, that resource will not be loaded.
+  Afterwards, watches that file and will reload it if if changes.
+  When that happens, your App's `reload_resource` method will be called (if it exists).
+
+- `run(app)`
+  Runs the Pyxel game. Your app must have the `update(self)` and `draw(self)` methods that Pyxel needs. 
+  It will reload resources and code if they are modified.
+
+- `watch_resource(filename)`
+  Watches that file. If it changes, will call your App's `reload_resource` method (if it exists).
+
+- `images[i].load(name_of_image_file, [excl_images], [excl_tilemaps], [excl_sounds], [excl_musics])`
+  Load the specified image (png/gif/jpg) into the image bank number `i`. 
+  Afterwards, watches that file and will reload it if if changes.
+  When that happens, your App's `reload_resource` method will be called (if it exists).
+
+- `tilemap[i].load(x, y, tmx_filename, layer)`
+  Load the specified tilemap (tmx format) into the tilemap bank number `i` at the specified layer.
+  Afterwards, watches that file and will reload it if if changes.
+  When that happens, your App's `reload_resource` method will be called (if it exists).
+
+### your App
+
+Your game must be in `game.py` in a class named `App` with the following methods:
+
+- `update(self)`
+- `draw(self)`
+
+In addition, you can have the following optional methods:
+
+- `reload(self, old_self)`
+  ReloadPyxel will call this method whenever any code was reloaded.
+  In that case, it will have created a new instance of your `App` object
+  and calls that method on it, passing to it the old instance.
+  It is your responsibility to transfer the state to the new object,
+  for example via the helper function
+  `reloadpyxel.copy_all_attributes(source,destination)`.
+  If you're holding on to other objects (perhaps a `Player` or `Enemy` you wrote),
+  then you will want to replace those with a new instance.
+
+- `reload_resource(self, list_of_file_names)`
+  ReloadPyxel will call this method whenever any resource was reloaded. It includes the
+  list of resources that were reloaded.
+  Normally you don't need to do anything special when a resource is reloaded,
+  but this can be useful if you asked for a custom file to be watched (say, a `.json`)
+  and want to reload it yourself.
 
