@@ -6,6 +6,8 @@ That means that now, while the game is running, if you change your graphics or e
 
 This includes your source files (`.py`), resource files (`.pyxres`) and all their contents (images, tilemaps, music), external images (`.png/.gif/.jpg`), and external tilemaps (`.tmx`). A mechanism is included so you can write code to hot-reload any other file type as well.
 
+![Resource editing](doc/res_reload.gif)
+
 Without Reload-Pyxel, you would have to quit your game, restart it, and navigate back to the level you updated to see the effect of your changes.
 
 ## How to use
