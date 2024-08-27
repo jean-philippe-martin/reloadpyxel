@@ -84,17 +84,18 @@ A simple example that is a good starting point is [`examples/code_and_resources/
 
 ### main.py
 
-The main file you need to include will do three things:
+The main file you need to include will do four things:
 1. Create a reloadpyxel object
 2. Call your `init_pyxel` function
 3. Create your `App`, passing it the reloadpyxel object
+4. Start the game
 
 ### reloadpyxel
 
 - `copy_all_attributes(source,destination)`
   Copies all the attributes from the source object to the destination object.
   for example if `source.x=2` before the call, then `destination.x=2` after the call.
-  
+
 - `load(name_of_resource_file, [excl_images], [excl_tilemaps], [excl_sounds], [excl_musics])`
   Load the resource file (.pyxres). If an option is `True`, that resource will not be loaded.
   Afterwards, watches that file and will reload it if if changes.
@@ -103,6 +104,7 @@ The main file you need to include will do three things:
 - `run(app)`
   Runs the Pyxel game. Your app must have the `update(self)` and `draw(self)` methods that Pyxel needs. 
   It will reload resources and code if they are modified.
+  You typically do not need to call this yourself, it's called in `main.py` for you.
 
 - `watch_resource(filename)`
   Watches that file. If it changes, will call your App's `reload_resource` method (if it exists).
@@ -117,7 +119,7 @@ The main file you need to include will do three things:
   Afterwards, watches that file and will reload it if if changes.
   When that happens, your App's `reload_resource` method will be called (if it exists).
 
-### your App
+### Your App
 
 Your game must be in `game.py` in a class named `App` with the following methods:
 
