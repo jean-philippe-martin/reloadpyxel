@@ -142,7 +142,7 @@ In addition, you can have the following optional methods:
   If you're holding on to other objects (perhaps a `Player` or `Enemy` you wrote),
   then you will want to replace those with a new instance.
 
-- `reload_resource(self, list_of_file_names)`
+- `reload_resources(self, list_of_file_names)`
   ReloadPyxel will call this method whenever any resource was reloaded. It includes the
   list of resources that were reloaded.
   Normally you don't need to do anything special when a resource is reloaded,
