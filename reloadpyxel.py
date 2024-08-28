@@ -145,7 +145,7 @@ class ReloadPyxel:
             if command.filename() in changed:
                 command.exec()
         # inform the program we have reloaded some resources
-        if changed:
+        if changed and hasattr(self.app, 'reload_resources'):
             reload_resources = getattr(self.app, 'reload_resources')
             if reload_resources:
                 reload_resources(self.load_list)
