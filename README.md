@@ -8,7 +8,7 @@ This includes your source files (`.py`), resource files (`.pyxres`) and all thei
 
 ![Resource editing](doc/res_reload.gif)
 
-Without Reload-Pyxel, you would have to quit your game, restart it, and navigate back to the level you updated to see the effect of your changes.
+Without Reload-Pyxel, you would have to quit your game, restart it, and navigate back to the level you updated to see the effect of your changes. This can be automated to a point with `pyxel watch`, but it still puts you back at the beginning.
 
 ## How to use
 
