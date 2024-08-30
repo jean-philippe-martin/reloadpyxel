@@ -141,8 +141,10 @@ class ReloadPyxel:
                 self._update_file_time(fname, mtime=mtime)
                 changed[fname]=True
         # reload all changed files (in the correct order, with the correct arguments)
+        must_reload = False
         for command in self.load_list:
-            if command.filename() in changed:
+            must_reload = must_reload or command.filename() in changed
+            if must_reload:
                 command.exec()
         # inform the program we have reloaded some resources
         if changed and hasattr(self.app, 'reload_resources'):

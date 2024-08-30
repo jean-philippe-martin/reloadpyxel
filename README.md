@@ -6,11 +6,11 @@ That means that now, while the game is running, if you change your graphics or e
 
 This includes your source files (`.py`), resource files (`.pyxres`) and all their contents (images, tilemaps, music), external images (`.png/.gif/.jpg`), and external tilemaps (`.tmx`). A mechanism is included so you can write code to hot-reload any other file type as well.
 
-![Resource editing in action](doc/edit_resources.gif)
+![Resource editing in action](docs/edit_resources.gif)
 
 The gif below shows an example where you walk to a part of the level, realize the collison detection isn't working right, fix it, and you can see the result of your change immediately.
 
-![Code editing in action](doc/edit_code.gif)
+![Code editing in action](docs/edit_code.gif)
 
 Without Reload-Pyxel, you would have to quit your game, restart it, and navigate back to the level you updated to see the effect of your changes. This can be automated to a point with `pyxel watch`, but it still puts you back at the beginning.
 

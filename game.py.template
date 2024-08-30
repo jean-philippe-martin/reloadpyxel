@@ -1,0 +1,32 @@
+# Copy this file as a template in your own folder.
+# Rename it to "game.py"
+
+import pyxel
+import reloadpyxel
+
+class App:
+    @staticmethod
+    def init_pyxel():
+        """Init pyxel, set window size and title."""
+        pyxel.init(120, 120, title="Demo Platformer")
+
+    def __init__(self, ryxel):
+        """Initialize your App object here."""
+        # You may choose to save the ryxel object
+        self.ryxel = ryxel
+        # Load all the resources via ryxel
+        ryxel.load("resources.pyxres")
+        # Do not call ryxel.run (main does it for you)
+
+    def reload(self, old_self):
+        """Called after a hot reload, on the newly-created updated app object."""
+        reloadpyxel.copy_all_attributes(old_self, self)
+        # Do any other needed state updates here
+        return self
+
+    def update(self):
+        """Called every frame, here update the game state as needed."""
+
+    def draw(self):
+        """Called every frame, here draw the world."""
+        # You can use all the pyxel functions, for example pyxel.cls
