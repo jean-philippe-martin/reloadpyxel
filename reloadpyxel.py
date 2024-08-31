@@ -26,8 +26,10 @@ import sys
 
 
 def copy_all_attributes(source_object, dest_object):
-    """Shallow copy all the attributes from the source to the destination."""
+    """Shallow copy all the attributes from the source to the destination.
+    Returns the destination object."""
     dest_object.__dict__.update(source_object.__dict__)
+    return dest_object
 
 
 class ReloadPyxel:
