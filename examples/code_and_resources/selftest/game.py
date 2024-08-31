@@ -1,9 +1,9 @@
-# Copy this file as a template in your own folder.
-# Rename it to "game.py"
-
 import pyxel
 import reloadpyxel
 import shutil
+
+# A little self-test:
+# Running it you should never see red text with the word "FAIL"
 
 STATES = [
     "TEST_LOAD", "TEST_EXCL_IMAGES", "TEST_EXCL_TILEMAPS",
@@ -28,7 +28,6 @@ class App:
         shutil.copyfile("hot_horiz.pyxres", "test_resource_1.pyxres")
         shutil.copyfile("hot_horiz.pyxres", "test_resource_2.pyxres")
         self.set_state(0)
-        self.state_index = 0
         self.state_countdown = STATE_DURATION
         self.running = True
         # Do not call ryxel.run (main does it for you)
@@ -73,7 +72,7 @@ class App:
                 shutil.copyfile("cold_vert.pyxres", "test_resource_2.pyxres")
                 self.ryxel.load("test_resource_1.pyxres")
                 self.ryxel.load("test_resource_2.pyxres", excl_images=True)
-                # Trigger reload of the first file. the tilemap override stay?
+                # Trigger reload of the first file. Does the tilemap override stay?
                 shutil.copyfile("hot_horiz.pyxres", "test_resource_1.pyxres")
                 return ("hot", "vert")
             case _:
