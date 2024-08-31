@@ -22,7 +22,7 @@ The use is very similar to normal Pyxel, with a few tweaks.
 
 1. Copy both the `reloadpyxel.py` and `main.py` files onto your project folder.
 
-2. Create your own game and call it `game.py`. Here are the starting contents:
+2. Create your own game and call it `game.py`. Here are the starting contents (or copy `game.py.template`):
 
 ```python
 import pyxel
@@ -36,7 +36,6 @@ class App:
 
     def __init__(self, repyxel):
         # Load your resources here
-        repyxel.run(self)
 
     def update(self):
         if pyxel.btnp(pyxel.KEY_Q):
