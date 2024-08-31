@@ -4,7 +4,7 @@
 
 That means that now, while the game is running, if you change your graphics or edit the code, the changes will be reflected live in your game - without restarting it!
 
-This includes your source files (`.py`), resource files (`.pyxres`) and all their contents (images, tilemaps, music), external images (`.png/.gif/.jpg`), and external tilemaps (`.tmx`). A mechanism is included so you can write code to hot-reload any other file type as well.
+The detected changes include your source files (`.py`), resource files (`.pyxres`) and all their contents (images, tilemaps, music), external images (`.png/.gif/.jpg`), and external tilemaps (`.tmx`). A mechanism is included so you can write code to hot-reload any other file type as well.
 
 ![Resource editing in action](docs/edit_resources.gif)
 
@@ -63,8 +63,8 @@ pyxel run main.py
 
 The differences are:
 
-1. Your App class must be in `game.py` (you may add other files as needed)
-2. You must copy the reloadpyxel's `main.py` and `reloadpyxel.py` files next to your `game.py`
+1. Your App class must be in `game.py` (you may add other files as needed). You can use the template in this repository as a starting point.
+2. You must copy the reloadpyxel's `main.py` and `reloadpyxel.py` files in the same folder as your `game.py`
 3. `pyxel.init` is moved to a required function called `init_pyxel`
 4. `pyxel.load` is replaced with `repyxel.load`
 5. `pyxel.run` is replaced with `repyxel.run`, which takes your class as argument
@@ -75,6 +75,8 @@ The differences are:
 
 When you are done developing you app you can replace `repyxel.run` with `pyxel.run`
 to remove the hot reloading and get back the small bit of performance it consumes.
+
+Note that if you really don't want to call your game file `game.py` you can use a different name, you just have to update `main.py` to point to it.
 
 ## Examples
 
@@ -133,6 +135,7 @@ Your game must be in `game.py` in a class named `App` with the following methods
 In addition, you can have the following optional methods:
 
 - `reload(self, old_self)`
+  This method needs to be present for hot-reloading of code to be enabled.
   ReloadPyxel will call this method whenever any code was reloaded.
   In that case, it will have created a new instance of your `App` object
   and calls that method on it, passing to it the old instance.
@@ -144,8 +147,13 @@ In addition, you can have the following optional methods:
 
 - `reload_resources(self, list_of_file_names)`
   ReloadPyxel will call this method whenever any resource was reloaded. It includes the
-  list of resources that were reloaded.
+  list of resources that have changed. Asset hot-reloading will happen even if this
+  method is not present.
   Normally you don't need to do anything special when a resource is reloaded,
   but this can be useful if you asked for a custom file to be watched (say, a `.json`)
   and want to reload it yourself.
 
+
+### Additional documentation
+
+See also [Hot-reload, explained](docs/hotreload-explained.md) for an explanation of how to use hot-reload and how it works.

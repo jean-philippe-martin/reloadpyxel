@@ -51,13 +51,13 @@ Let's suppose your app has some variables of its own, `x` and `y` to track the p
 
 ![Before reload](example_before_reload.png)
 
-Here each rectangle represents an object. At the top is the class name, and underneath are the member variables, one per line. Those that are references are shown with an arrow to the thing they are referencing. So here for example your app's `draw` method you might look like this:
+Here each rectangle represents an object. At the top is the class name, and underneath are the member variables, one per line. Those that are references are shown with an arrow to the thing they are referencing. So here for example your app's `draw` method might look like this:
 
 ```python
 def draw(self):
     pyxel.cls(0)
     # Draw player
-    pyxel.blt(self.x,self.y, 0,0,8, self.dir*8,8, colkey=0)
+    pyxel.blt(self.x,self.y, 0,0,8, self.dir*8,8)
     # Draw enemy
     pyxel.blt(self.enemy.x, self.enemy.x, 0, 8,8, 8,8)
 ```
@@ -70,9 +70,14 @@ ReloadPyxl updates its reference to the new object, so that its `update` and `dr
 
 At this point we have a new app with the correct coordinates for the player, but it still has a reference to the old `enemy` object, using the old code.
 
+![After copy_all_attributes](example_after_copy.png)
+
+
 So what you have to do in your `reload` method is create a new instance of the `Enemy` object - since you're creating it after the new code has been loaded, this instance will be using the new code. Then you need to transfer state from the old enemy to the new one. You could for example add a `reload` method to your `Enemy` class, and have it call `reloadpyxel.copy_all_attributes`.
 
 The final situation then is that both the App and Enemy are using the new code, and the state is otherwise unchanged: the player and the enemy are still where they were before the reload.
+
+![After reload](example_after_reload.png)
 
 Here is the code:
 
@@ -92,6 +97,9 @@ class Enemy:
         return self
 ```
 
+
+You can see an animation illustrating this explanation by running the code in
+[`examples/code_and_resources/explainer/`](../examples/code_and_resources/explainer/) with `pyxel run main.py`
 
 
 ----

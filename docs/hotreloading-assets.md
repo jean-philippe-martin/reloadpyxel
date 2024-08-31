@@ -56,6 +56,10 @@ If you need to do some processing on your images (or tilemaps) on load, this is 
 
 You can see an example of this in the [offscreen example](../examples/resources_only/pyxel_originals/11_offscreen.py): this program uses the resources it loads to compute two new offscreen images, the "blt figure" and the "bltm figure". This needs to be redone if the resources are reloaded.
 
+## Processing custom files
+
+You can ask ReloadPyxel to watch additional resource files by calling `repyxel.watch_resource(filename)`: if that file is modified, it will call your `reload_resources` method.
+
 ----
 
 Next: [Hot-reloading *code* in reloadpyxel](hotreloading-code.md) <br/>
